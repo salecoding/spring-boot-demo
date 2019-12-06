@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lw.mapper.SysUserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.lw.domain.SysUserRole">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <result column="u_id" jdbcType="INTEGER" property="uId"/>
+        <result column="r_id" jdbcType="INTEGER" property="rId"/>
+    </resultMap>
+    <select id="findByUserName" resultMap="role">
+        SELECT
+            r.id,
+            r.name,
+            r.memo
+        FROM
+            sys_role r
+        LEFT JOIN sys_user_role ur ON (r.id = ur.r_id)
+        LEFT JOIN sys_user u ON (u.id = ur.u_id)
+        WHERE
+            u.username = #{username}
+  </select>
+</mapper>
